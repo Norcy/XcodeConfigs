@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>NCYCacheModel</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#import "QLJCE.h"
+
+@interface &lt;#ClassName#&gt; ()
+{
+    MoabCache *_cahce;// 缓存
+}
+@property (nonatomic, strong) QLASIHTTPRequest *dataRequest;
+@end
+
+@implementation &lt;#ClassName#&gt;
+
+#pragma mark - Life Cycle
+- (id)init
+{
+    if (self = [super init])
+    {
+        _cahce = [[MoabCache alloc] initWithName:@"&lt;#CacheName#&gt;" error:NULL];
+        self.cacheKey = @"&lt;#CacheKey#&gt;";
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [self cancelDataRequest];
+}
+
+#pragma mark - Load
+- (void)load:(ASICachePolicy)cachePolicy more:(BOOL)more
+{
+    if (!more &amp;&amp; cachePolicy == ASIUseDefaultCachePolicy)
+    {
+        &lt;#QLJCEResponse#&gt; *jceResp = [&lt;#QLJCEResponse#&gt; mc_ReadJCECache:_cahce forKey:self.cacheKey];
+        [self processResponce:jceResp isCache:YES];
+        [super requestDidFinishLoad:nil];
+    }
+    
+    [self cancelDataRequest];
+    
+    QLASIHTTPRequest *request = [QLASIHTTPRequest requestWithNSURL:QLFacilityUrl(fullJCE_URLInfomation) userdelegate:self];
+    
+    &lt;#QLJCERequest#&gt; *cmt = [&lt;#QLJCERequest#&gt; object];
+    &lt;#Set cmt's parameter#&gt;
+    
+    QLJCEResponse *resp = [[QLJCEResponse alloc] initWithJCEObject:cmt requestJCECmd:&lt;#JCE命令字#&gt;];
+    request.modelID = &lt;#JCE命令字#&gt;;
+    request.response = resp;
+    request.cachePolicy = cachePolicy;
+    request.secondsToCache = QL_DEFAULT_CACHE_EXPIRATION_AGE;
+    
+    self.dataRequest = request;
+    [request send];
+}
+
+#pragma mark - QLASIHTTPDelegate
+- (void)requestDidFinishLoad:(QLASIHTTPRequest*)request
+{
+    QLJCEResponse *response = (QLJCEResponse *)request.response;
+    &lt;#QLJCEResponse#&gt; *jceResp = response.responseJCEObject;
+    [self processResponce:jceResp isCache:NO];
+    [super requestDidFinishLoad:request];
+}
+
+- (void)request:(ASIHTTPRequest *)request didFailLoadWithError:(NSError *)error
+{
+    [super request:request didFailLoadWithError:error];
+}
+
+- (void)requestDidRetryRequest:(QLASIHTTPRequest *)request
+{
+    self.dataRequest.userdelegate = nil;
+    [self.dataRequest clearDelegatesAndCancel];
+    self.dataRequest = request;
+}
+
+#pragma mark - Help Methods
+- (void)processResponce:(&lt;#QLJCEResponse#&gt; *)jceResp isCache:(BOOL)isCache
+{
+    if ([jceResp isKindOfClass:[&lt;#QLJCEResponse#&gt; class]] &amp;&amp; jceResp.jce_errCode == 0)
+    {
+        if (!self.isLoadingMore &amp;&amp; !isCache)
+        {
+            [jceResp mc_SaveJCECache:_cahce forKey:self.cacheKey];
+        }
+    }
+}
+
+- (void)cancelDataRequest
+{
+    if (self.dataRequest)
+    {
+        self.dataRequest.userdelegate = nil;
+        [self.dataRequest clearDelegatesAndCancel];
+        self.dataRequest = nil;
+    }
+}
+
+@end
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>217EB461-0F86-4393-902A-BA9817D6C300</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>带Cache的JCE Model</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>JCEModel(Cache)</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

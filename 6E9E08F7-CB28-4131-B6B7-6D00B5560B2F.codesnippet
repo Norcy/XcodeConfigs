@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>NCYONAView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>TopLevel</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#import "&lt;#QLONAView#&gt;.h"
+#import "&lt;#QLJCEONAView#&gt;.h"
+
+@interface &lt;#QLONAView#&gt; ()
+@property (nonatomic, strong) &lt;#QLJCEONAView#&gt; *obj;
+@end
+
+@implementation &lt;#QLONAView#&gt;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
+    {
+        ColorSubviews(self.contentView);
+    }
+    return self;
+}
+
+- (void)setObject:(&lt;#QLJCEONAView#&gt; *)object
+{
+    if (![object isKindOfClass:[&lt;#QLJCEONAView#&gt; class]])
+    {
+        return;
+    }
+    self.obj = object;
+
+    [self setNeedsLayout];
+}
+
++ (CGFloat)getHeightWithPosterObj:(nonnull id)posterObj uInfo:(nonnull id)uInfo
+{
+    if (![posterObj isKindOfClass:[&lt;#QLJCEONAView#&gt; class]])
+    {
+        return 0;
+    }
+    return 0;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+}
+@end</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>6E9E08F7-CB28-4131-B6B7-6D00B5560B2F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string>QLONAView</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>QLONAView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
