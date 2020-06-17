@@ -6,8 +6,7 @@ Xcode 代码块备份
 或手动输入
 
 ```sh
-mv ~/Library/Developer/Xcode/UserData/CodeSnippets ~/Library/Developer/Xcode/UserData/CodeSnippets.backup
 cd ~/Library/Developer/Xcode/UserData
+mv CodeSnippets CodeSnippets.backup
 git clone https://github.com/Norcy/XcodeSnippets.git CodeSnippets
-echo "done"
 ```
