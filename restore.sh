@@ -1,5 +1,9 @@
 #! /bin/bash
-cd ~/Library/Developer/Xcode/UserData
-mv CodeSnippets CodeSnippets.backup
-git clone https://github.com/Norcy/XcodeSnippets.git CodeSnippets
+cd ~/Library/Developer/Xcode/
+mv UserData UserData.backup
+mkdir UserData
+mkdir temp_xcode_config
+git clone https://github.com/Norcy/XcodeConfigs.git temp_xcode_config
+cp temp_xcode_config/UserData/* UserData
+rm -rf temp_xcode_config
 echo "done"
