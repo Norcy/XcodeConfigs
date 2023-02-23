@@ -1,12 +1,8 @@
-# XcodeSnippets
-Xcode 代码块备份
+# XcodeConfigs
+Xcode 个性化配置备份，包括
 
-直接执行 `restore.sh`
++ 代码块
++ 代码主题
++ 快捷键
 
-或手动输入
-
-```sh
-cd ~/Library/Developer/Xcode/UserData
-mv CodeSnippets CodeSnippets.backup
-git clone https://github.com/Norcy/XcodeSnippets.git CodeSnippets
-```
+clone 到任意地方后执行 `./restore.sh`
